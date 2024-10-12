@@ -9,18 +9,13 @@ public interface IRoad
 
 public class Road : IRoad
 {
-    private int  rowCount;
-    private int columnCount;
-    public int RowCount
-    {
-      get { return rowCount; }
-      set { rowCount = value; }
-    }
-    public int ColCount
-    {
-      get { return columnCount; }
-      set { columnCount = value; }
-    }
-    
-
+  public int RowCount { get; }
+  public int ColCount { get; }
+  private IVehicle[,] vehicles;
+  public Road(int row, int column)
+  {
+    RowCount =  row;
+    ColCount = column;
+    IVehicle[,] vehicles = new IVehicle[row, column];
+  }
 }
