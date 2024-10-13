@@ -16,14 +16,14 @@ public class Road : IRoad
   {
     RowCount =  rowCount;
     ColCount = colCount;
-    IVehicle[,] vehicles = new IVehicle[rowCount, colCount];
+    vehicles = new IVehicle[rowCount, colCount];
   }
 
   public IVehicle? GetVehicle(int row, int column)
   {
-    return vehicles[row,cloumn];
+    return vehicles[row,column];
   }
-  void SetVehicle(int row, int column, IVehicle vehicle)
+  public void SetVehicle(int row, int column, IVehicle vehicle)
   {
     if(row >= 0 && row < RowCount && column >= 0 && column < ColCount)
       vehicles[row, column] = vehicle;

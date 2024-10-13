@@ -11,12 +11,12 @@
 <br>
 
 
-@if(road = null)
+@if (road = null)
 {
     <div>
         <h3>Create Road</h3>
         <div>
-              Rows: <input @bind="userRequestRows" />
+            Rows: <input @bind="userRequestRows" />
         </div>
         <div>
             Columns: <input @bind="userRequestColumns" />
@@ -40,7 +40,7 @@ else
                     </td>
                 }
             </tr>
-        }    
+        }
     </table>
 
     <div>
@@ -51,18 +51,55 @@ else
         <div>
             Column: <input @bind="vehicleColumnInput" />
         </div>
-        <button @onclick="() => SetVehicle("Car")">Set Car</button>
-        <button @onclick="() => SetVehicle("Bus")">Set Bus</button>
-        <button @onclick="() => SetVehicle("FireTruck")">Set FireTruck</button>
-        <button @onclick="() => SetVehicle("Taxi")">Set Taxi</button>
+        <button @onclick="() => SetVehicle(" Car")">Set Car</button>
+        <button @onclick="() => SetVehicle(" Bus")">Set Bus</button>
+        <button @onclick="() => SetVehicle(" FireTruck")">Set FireTruck</button>
+        <button @onclick="() => SetVehicle(" Taxi")">Set Taxi</button>
     </div>
 }
 
-@code 
+@code
 {
     private string userRequestRows;
     private string userRequestColumns;
     private IRoad? road = null;
     private string displayErrorToUser;
-    
+
+    private void CreateRoad()
+    {
+        if (int.TryParse(userRequestRows, out int rows) && int.TryParse(userRequestColumns, out int columns))
+        {
+            road = new Road(rows, columns);
+            displayErrorToUser = string.Empty; 
+        }
+        else
+        {
+            displayErrorToUser = "Please, enter valid numbers for rows and columns, try again...";
+        }
+    }
+
+    private void SetVehicle(string vehicleType)
+    {
+        if (int.TryParse(vehicleRowInput, out int row) && int.TryParse(vehicleColumnInput, out int column))
+        {
+            IVehicle vehicle = vehicleType switch
+            {
+                "Car" => new Car(),
+                "Bus" => new Bus(),
+                "FireTruck" => new FireTruck(),
+                "Taxi" => new Taxi(),
+                _ => null
+            };
+
+            if (vehicle != null)
+            {
+                road.SetVehicle(row, column, vehicle);
+                displayErrorToUser = string.Empty; 
+            }
+        }
+        else
+        {
+            displayErrorToUser = "Please, enter valid numbers for rows and columns, try again...";
+        }
+    }
 }
