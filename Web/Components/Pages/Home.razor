@@ -16,7 +16,7 @@
     <div>
         <h3>Create Road</h3>
         <div>
-              Rows: <Input @bind="userRequestRows" />
+              Rows: <input @bind="userRequestRows" />
         </div>
         <div>
             Columns: <input @bind="userRequestColumns" />
@@ -42,6 +42,20 @@ else
             </tr>
         }    
     </table>
+
+    <div>
+        <h3>Set a Vehicle</h3>
+        <div>
+            Row: <input @bind="vehicleRowInput" />
+        </div>
+        <div>
+            Column: <input @bind="vehicleColumnInput" />
+        </div>
+        <button @onclick="() => SetVehicle("Car")">Set Car</button>
+        <button @onclick="() => SetVehicle("Bus")">Set Bus</button>
+        <button @onclick="() => SetVehicle("FireTruck")">Set FireTruck</button>
+        <button @onclick="() => SetVehicle("Taxi")">Set Taxi</button>
+    </div>
 }
 
 @code 
