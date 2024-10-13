@@ -4,13 +4,45 @@
 
 @* link to sample page *@
 <a href="/sample">View Sample Page</a>
+<div>@yourErrorVariableGoesHere</div>
 @* br's for extra spacing *@
 <br>
 <br>
 <br>
 
 
-
+@if(road = null)
+{
+    <div>
+        <h3>Create Road</h3>
+        <div>
+              Rows: <Input @bind="userRequestRows" />
+        </div>
+        <div>
+            Columns: <input @bind="userRequestColumns" />
+        </div>
+        <button @onclick="CreateRoad">Create Road</button>
+    </div>
+}
+else
+{
+    <table>
+        @for (int row = 0; row < road.RowCount; row++)
+        {
+            <tr>
+                @for (int col = 0; col < road.ColCount; col++)
+                {
+                    <td>
+                        @if (road.GetVehicle(row, col) != null)
+                        {
+                            <img src="@road.GetVehicle(row, col)?.GetImagePath()" height="100" />
+                        }
+                    </td>
+                }
+            </tr>
+        }    
+    </table>
+}
 
 @code 
 {
